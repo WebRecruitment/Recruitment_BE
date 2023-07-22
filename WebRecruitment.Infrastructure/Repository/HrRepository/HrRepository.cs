@@ -10,28 +10,19 @@ namespace WebRecruitment.Infrastructure.Repository.HrRepository
 {
     public class HrRepository : GenericRepository<Hr>, IHR
     {
-        private readonly IMapper _mapper;
-        private readonly ICompany _company;
+      
 
         public HrRepository(TuyendungContext context) : base(context)
         {
         }
 
 
-        public async Task<Hr> CreateAccountHRByPositionCompany(Hr hr)
-        {
-
-            _context.Accounts.Add(hr.Account);
-            _context.Hrs.Add(hr);
-            await _context.SaveChangesAsync();
-            return hr;
-
-        }
+  
 
         public async Task<List<Hr>> GetALLHr()
         {
             
-                var hr = await _context.Hrs!
+                var hr = await _context.Set<Hr>()
                 .Include(a => a.Account)
                 .Include(p => p.Position)
                 .Include(p => p.Posts)
@@ -53,11 +44,11 @@ namespace WebRecruitment.Infrastructure.Repository.HrRepository
             .Include(m => m.Meetings)
             .Include(o => o.Operations)
             .FirstOrDefaultAsync(s => s.HrId == hrId);
-
             if (hr == null)
             {
-                throw new Exception($"{nameof(hrId)} is null");
+                throw new Exception("NOT FOUND HR");
             }
+
             return hr;
 
         }
@@ -65,7 +56,7 @@ namespace WebRecruitment.Infrastructure.Repository.HrRepository
         public async Task<List<Hr>> GetHrByName(string name)
         {
 
-            var hr = _context.Hrs
+            var hr = _context.Set<Hr>()
                 .Where(e => e.NameHr.Contains(name))
                 .Include(a => a.Account)
                 .Include(p => p.Position)
@@ -73,8 +64,9 @@ namespace WebRecruitment.Infrastructure.Repository.HrRepository
                 .ToList();
             if (hr == null)
             {
-                throw new Exception($"{nameof(name)} is null" + name);
+                throw new Exception("NOT FOUND HR");
             }
+
             return hr;
 
 
@@ -83,53 +75,14 @@ namespace WebRecruitment.Infrastructure.Repository.HrRepository
         public async Task<List<Hr>> GetHrByStatus(string status)
         {
 
-            var hr = await _context.Hrs
+            var hr = await _context.Set<Hr>()
             .Where(e => e.Status.ToUpper().Contains(status.ToUpper()))
             .Include(a => a.Account)
             .Include(p => p.Position)
             .Include(c => c.Company)
             .ToListAsync();
-            if (hr == null)
-            {
-                throw new Exception($"{nameof(status)} is null" + status);
-            }
+           
             return hr;
-
-        }
-
-
-
-        public async Task SetHrStatus(Guid hrId)
-        {
-
-            var hr = await _context.Hrs.SingleOrDefaultAsync(d => d.HrId == hrId);
-            if (hr == null)
-            {
-                throw new Exception($"{nameof(hrId)} is null" + hrId);
-            }
-            hr.Status = HRENUM.ACTIVE.ToString();
-            _context.Hrs!.Update(hr);
-            await _context.SaveChangesAsync();
-        }
-
-
-        public async Task SetStatusAccountOfHr(Guid hrId)
-        {
-            
-                var hr = _context.Hrs
-                .SingleOrDefault(d => d.HrId == hrId);
-                if (hr != null)
-                {
-                    var accountIdOfHr = hr.Accountid;
-                    var updateStatusOfHr = _context.Accounts.SingleOrDefault(d => d.Accountid == accountIdOfHr);
-                    if (updateStatusOfHr != null)
-                    {
-                        updateStatusOfHr.Status = ACCOUNTENUM.ACCEPT.ToString();
-                        _context.Accounts.Update(updateStatusOfHr);
-                        await _context.SaveChangesAsync();
-                    }
-                }
-            
 
         }
 

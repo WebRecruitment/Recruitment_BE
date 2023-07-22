@@ -57,8 +57,8 @@ namespace WebRecruitment.Infrastructure.Service
 
             await _unitOfWork.Apply.CheckCvIdExistPost(operation, post);
 
-            var response = await _unitOfWork.Apply.CreateOperationCompany(operation);
-
+            var response = _unitOfWork.Apply.Add(operation);
+            await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseOperation>(response);
 
 

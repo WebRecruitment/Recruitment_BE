@@ -46,9 +46,8 @@ namespace WebRecruitment.Infrastructure.Service
             cv.CreationDate = DateTime.Now;
             cv.UrlFile = blogInstance.Uri.AbsoluteUri;
 
-            var response = await _unitOfWork.Cv.CreatCv(cv);
-
-            //await _unitOfWork.CommitAsync();
+            var response =  _unitOfWork.Cv.Add(cv);
+            await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponsePostCv>(response);
 
 

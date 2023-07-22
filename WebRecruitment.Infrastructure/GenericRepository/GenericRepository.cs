@@ -18,11 +18,14 @@ namespace WebRecruitment.Infrastructure.GenericRepository
         public GenericRepository(TuyendungContext context)
         {
             _context = context;
-            _entitiySet=_context.Set<T>();
+            _entitiySet = _context.Set<T>();
         }
 
-        public void Add(T entity)
-            => _context.Add(entity);
+        public T Add(T entity)
+        {
+            _context.Add(entity);
+            return entity;
+        }
 
 
         public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
@@ -91,8 +94,12 @@ namespace WebRecruitment.Infrastructure.GenericRepository
 
         }
 
-        public void Update(T entity)
-            => _context.Update(entity);
+        public T Update(T entity)
+        {
+            _context.Update(entity);
+            return entity;
+        }
+
 
 
         public void UpdateRange(IEnumerable<T> entities)

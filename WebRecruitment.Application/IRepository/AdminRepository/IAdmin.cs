@@ -12,9 +12,6 @@ namespace WebRecruitment.Application.IRepository.AdminRepository
 {
     public interface IAdmin : IGenericRepository<Admin>
     {
-        Task<Admin> CreateAccountAdmin(Admin admin);
-        //   Task<ResponseAccountAdmin> test(RequestAccountToAdmin requestAccountToAdmin);
-
         Task<Admin> GetAdminById(Guid id);
 
     }

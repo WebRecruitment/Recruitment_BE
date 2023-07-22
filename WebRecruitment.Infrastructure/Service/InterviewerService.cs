@@ -43,8 +43,8 @@ namespace WebRecruitment.Infrastructure.Service
             }
 
             interviewer.Status = INTERVIEWERENUM.INACTIVE.ToString();
-            await _unitOfWork.Interviewer.CreateAccountInterviewerByPositionCompany(interviewer);
-
+            _unitOfWork.Interviewer.Add(interviewer);
+            await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseAccountInterviewer>(interviewer);
 
         }
@@ -79,10 +79,9 @@ namespace WebRecruitment.Infrastructure.Service
                 throw new Exception("Not Match Company");
             }
 
-
             var updateOperation = _mapper.Map(requestUpdateStatusApply, operation);
-            var response = await _unitOfWork.Apply.UpdateOperation(updateOperation);
-
+            var response = _unitOfWork.Apply.Update(updateOperation);
+            await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseOperation>(response);
 
         }

@@ -9,7 +9,6 @@ namespace WebRecruitment.Application.IRepository.JobRepository
     public interface IJob : IGenericRepository<Job>
     {
 
-        Task<Job> CreateJobByCompany(Job job);
         Task<Job> GetJobById(Guid jobId);
         Task<List<Job>> GetJobByNameSkill(string nameSkill);
         Task<List<Job>> GetAllJob();

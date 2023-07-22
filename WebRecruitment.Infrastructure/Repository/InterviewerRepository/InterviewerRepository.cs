@@ -11,20 +11,10 @@ namespace WebRecruitment.Infrastructure.Repository.InterviewerRepository
         {
         }
 
-        public async Task<Interviewer> CreateAccountInterviewerByPositionCompany(Interviewer interviewer)
-        {
-
-            await _context.Set<Account>()!.AddAsync(interviewer.Account);
-            await _context.Set<Interviewer>()!.AddAsync(interviewer);
-            await _context.SaveChangesAsync();
-            return interviewer;
-
-        }
-
         public async Task<List<Interviewer>> GetALLInterviewer()
         {
-
-            var interviewer = await _context.Interviewers!
+            
+            var interviewer = await _context.Set<Interviewer>()!
             .Include(a => a.Account)
             .Include(p => p.Position)
             .Include(m => m.Meetings)
@@ -38,7 +28,7 @@ namespace WebRecruitment.Infrastructure.Repository.InterviewerRepository
         public async Task<Interviewer> GetInterviewerById(Guid interviewerId)
         {
 
-            var interviewer = await _context.Interviewers!
+            var interviewer = await _context.Set<Interviewer>()!
             .Include(a => a.Account)
             .Include(p => p.Position)
             .Include(c => c.Company)
@@ -47,10 +37,11 @@ namespace WebRecruitment.Infrastructure.Repository.InterviewerRepository
 
             if (interviewer == null)
             {
-                throw new Exception($"{nameof(interviewer)} is null");
+                throw new Exception("INTERVIEWER IS NULL");
             }
             return interviewer;
 
         }
+       
     }
 }

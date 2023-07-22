@@ -15,9 +15,6 @@ namespace WebRecruitment.Application.IRepository.CvRepository
         Task<List<Cv>> getAllCvs();
         Task<Cv> GetByCvId(Guid cVId);
         Task<Cv> GetByCvWId(Guid? cVId);
-        Task UpdateCvAsync(Guid id, Cv cv);
-        Task DeleteCvAsync(Guid id);
-        Task<Cv> CreatCv(Cv cv);
 
     }
 }

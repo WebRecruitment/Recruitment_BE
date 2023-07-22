@@ -11,11 +11,6 @@ namespace WebRecruitment.Application.IRepository.PostsRepository
         public Task<List<Post>> GetAllPostAsync();
         public Task<Post> GetPostById(Guid postId);
    //     public Task UpdatePostAsync(Guid id, Post model);
-        public Task DeletePostAsync(Guid id);
-        public Task<Post> CreatePostCompany(Post post);
-
-
-        public Task<Post> UpdatePostIdCompanyIdWithStatus(Post post);
 
         public Task<List<Post>> GetPostByLocation(string location);
         public Task<List<Post>> GetPostBySalary(double salary);

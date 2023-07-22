@@ -27,8 +27,4 @@
     <ProjectReference Include="..\WebRecruitment.Application\WebRecruitment.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\AuthenRepository\" />
-  </ItemGroup>
-
 </Project>

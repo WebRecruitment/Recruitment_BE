@@ -31,7 +31,7 @@ namespace WebRecruitment.Infrastructure.Service
             }
 
             job.Status = JOBENUM.ACCEPT.ToString();
-            var response = await _unitOfWork.Job.CreateJobByCompany(job);
+            var response =  _unitOfWork.Job.Add(job);
             await _unitOfWork.CommitAsync();
 
             return _mapper.Map<ResponseJobCompany>(response);

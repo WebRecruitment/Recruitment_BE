@@ -27,7 +27,6 @@ namespace WebRecruitment.Infrastructure.Service
         {
 
             var post = _mapper.Map<Post>(requestCreatePost);
-            post.Requirements= $"<div>{requestCreatePost.Requirements}</div>";
             var job = await _unitOfWork.Job.GetJobById(post.JobId);
 
             if (!job.Status.Equals(JOBENUM.ACCEPT.ToString()))
@@ -51,9 +50,9 @@ namespace WebRecruitment.Infrastructure.Service
                 throw new Exception("Company NOT MATCH JOB AND HR");
             }
             post.Status = POSTENUM.REQUESTCOMPANY.ToString();
-            await _unitOfWork.Post.CreatePostCompany(post);
+            var addPost= _unitOfWork.Post.Add(post);
             await _unitOfWork.CommitAsync();
-            return _mapper.Map<ResponsePostCompany>(post);
+            return _mapper.Map<ResponsePostCompany>(addPost);
         }
 
 

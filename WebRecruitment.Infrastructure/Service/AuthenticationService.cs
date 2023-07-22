@@ -34,10 +34,7 @@ namespace WebRecruitment.Infrastructure.Service
             }
 
             var account = await _unitOfWork.Authentication.Validate(request);
-            if (account == null )
-            {
-                throw new Exception("Invalid username/password");
-            }
+           
 
             var response = _tokensHandler.CreateAccessToken(account);
             return _mapper.Map<AuthenResponseMessToken>(response);
@@ -47,21 +44,12 @@ namespace WebRecruitment.Infrastructure.Service
         {
             var token = _tokensHandler.TakeRefreshToken(refreshToken, userEmail);
 
-            if (token == null)
-            {
-                throw new Exception("Invalid refresh token.");
-            }
-
             if (token.Expiration < DateTime.UtcNow)
             {
                 throw new Exception("Expired refresh token.");
             }
 
             var user = await _unitOfWork.Account.GetAccountByUserName(userEmail);
-            if (user == null)
-            {
-                throw new Exception("Invalid refresh token.");
-            }
 
             var accessToken = _tokensHandler.CreateAccessToken(user);
             return _mapper.Map<AuthenResponseMessToken>(accessToken);

@@ -11,11 +11,9 @@ namespace WebRecruitment.Application.IRepository.HRRepository
     {
         Task<List<Hr>> GetALLHr();
         Task<Hr> GetHrById(Guid hrId);
-        Task<Hr> CreateAccountHRByPositionCompany(Hr hr);
-        Task SetStatusAccountOfHr(Guid hrId);
         Task<List<Hr>> GetHrByName(string name);
         Task<List<Hr>> GetHrByStatus(string status);
-        Task SetHrStatus(Guid hrId);
+     
 
 
 

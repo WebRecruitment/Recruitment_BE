@@ -19,29 +19,16 @@ namespace WebRecruitment.Infrastructure.Repository.CompanyRepository
         {
         }
 
-        public void ChangeStatus(Guid id)
-        {
-            var company = _context.Companies!.Find(id);
-            company.Status = COMPANYENUM.INACTIVE.ToString();
-            company.Account.Status = ACCOUNTENUM.INACTIVE.ToString();
-            _context.Update(company);
-            _context.SaveChanges();
-        }
-
-
         public async Task<Company> CreateAccountCompany(Company company)
         {
 
             _context.Set<Company>()!.Add(company);
-            await _context.SaveChangesAsync();
             return company;
 
         }
-
         public async Task<List<Company>> GetALLCompany()
         {
-            try
-            {
+            
                 var companies = await _context.Set<Company>()
                     .Include(c => c.Account)
                     .Include(c => c.Positions)
@@ -53,17 +40,13 @@ namespace WebRecruitment.Infrastructure.Repository.CompanyRepository
                     //.ThenInclude(m=>m.Hr.Meetings)
                     .ToListAsync();
                 return companies;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"{ex.Message} \nERROR Repository Get All Company", ex);
-            }
+           
         }
 
         public async Task<Company> GetByCompanyId(Guid companyId)
         {
 
-            var company = await _context.Companies!
+            var company = await _context.Set<Company>()
             .Include(c => c.Account)
             .Include(c => c.Positions)
             .Include(c => c.Hrs)
@@ -72,10 +55,7 @@ namespace WebRecruitment.Infrastructure.Repository.CompanyRepository
             .Include(c => c.Posts)
             .Include(o => o.Operations)
             .FirstOrDefaultAsync(c => c.CompanyId == companyId);
-            if (company == null)
-            {
-                throw new Exception($"{company.CompanyId} is null");
-            }
+            
             return company;
 
         }
@@ -92,9 +72,9 @@ namespace WebRecruitment.Infrastructure.Repository.CompanyRepository
             .Include(c => c.Posts)
             .Include(o => o.Operations)
             .FirstOrDefaultAsync(c => c.CompanyId == companyId);
-            if (company == null)
+            if(company == null)
             {
-                throw new Exception("Invalid COMPANY ID");
+                throw new Exception("NOT FOUND COMPANY");
             }
             return company;
 
@@ -108,19 +88,13 @@ namespace WebRecruitment.Infrastructure.Repository.CompanyRepository
              .ToListAsync();
             if (company == null)
             {
-                throw new Exception($"{company} is null");
+                throw new Exception("NOT FOUND COMPANY");
             }
             return company;
 
         }
 
-        public async Task<Company> UpdateCompany(Company company)
-        {
-
-            _context.Set<Company>().Update(company);
-            await _context.SaveChangesAsync();
-            return company;
-        }
+        
 
     }
 }

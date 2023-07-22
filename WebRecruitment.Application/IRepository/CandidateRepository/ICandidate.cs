@@ -7,7 +7,6 @@ namespace WebRecruitment.Application.IRepository.CandidateRepository
     {
         Task<List<Candidate>> GetALLCandidate();
 
-        Task<Candidate> CreateAccountCandidate(Candidate candidate);
         Task<Candidate> CheckCandidateIdByCv(Cv cv);
     }
 }

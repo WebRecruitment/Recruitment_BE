@@ -26,7 +26,7 @@ namespace WebRecruitment.Infrastructure.Service
             var request = _mapper.Map<Admin>(requestAccountToAdmin);
 
             request.Account.HashPassword = _passwordHasher.HashPassword(requestAccountToAdmin.HashPassword);
-            var admin = await _unitOfWork.Admin.CreateAccountAdmin(request);
+            var admin =  _unitOfWork.Admin.Add(request);
             return _mapper.Map<ResponseAccountAdmin>(admin);
         }
 

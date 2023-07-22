@@ -19,7 +19,7 @@ namespace WebRecruitment.Infrastructure.Repository.PositionRepository
             var position = await _context.Set<Position>()!.FirstOrDefaultAsync(p => p.PositionId == positionId);
             if (position == null)
             {
-                throw new Exception($"{nameof(positionId)} is null" + positionId);
+                throw new Exception("NOT FOUND POSITION");
             }
             return position;
 

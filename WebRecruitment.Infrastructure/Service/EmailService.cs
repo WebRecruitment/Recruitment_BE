@@ -24,6 +24,10 @@ namespace WebRecruitment.Infrastructure.Service
         public async Task SendMail(string recipientEmail)
         {
             var account = await _unitOfWork.Account.GetAccountByEmail(recipientEmail);
+            if (account == null)
+            {
+                throw new Exception("Account Null");
+            }
             var token = _tokensHandler.CreateAccessToken(account);
 
             var fromAddress = new MailAddress(_email.From);

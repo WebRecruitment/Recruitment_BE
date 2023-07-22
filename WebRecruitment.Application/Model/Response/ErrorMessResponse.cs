@@ -5,7 +5,7 @@
 
         public ErrorMessResponse() { }
 
-        public ErrorMessResponse(bool success, Exception exception, int message, string error)
+        public ErrorMessResponse(bool success, Exception exception, string message, int error)
         {
             Success = success;
             Exception = exception;
@@ -15,8 +15,8 @@
 
         public bool Success { get; set; }
         public Exception Exception { get; set; }
-        public int Message { get; set; }
-        public string Error { get; set; }
+        public string Message { get; set; }
+        public int Error { get; set; }
 
     }
 }

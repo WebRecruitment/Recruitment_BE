@@ -33,7 +33,7 @@ namespace WebRecruitment.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Data Source=mssql-135092-0.cloudclusters.net,10002;Initial Catalog=Tuyendung;User ID=admin;pwd=03634237422002Duy;TrustServerCertificate=True;MultipleActiveResultSets=true");
-            optionsBuilder.UseSqlServer("Data Source=mssql-136911-0.cloudclusters.net,10008;Initial Catalog=tuyendung;User ID=admin;pwd=03634237422002Duy;TrustServerCertificate=True;MultipleActiveResultSets=true");
+            //optionsBuilder.UseSqlServer("Data Source=mssql-136911-0.cloudclusters.net,10008;Initial Catalog=tuyendung;User ID=admin;pwd=03634237422002Duy;TrustServerCertificate=True;MultipleActiveResultSets=true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

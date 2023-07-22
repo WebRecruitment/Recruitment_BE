@@ -44,7 +44,8 @@ namespace WebRecruitment.Infrastructure.Service
             }
 
             hr.Status = HRENUM.INACTIVE.ToString();
-            var response = await _unitOfWork.Hr.CreateAccountHRByPositionCompany(hr);
+            var response = _unitOfWork.Hr.Add(hr);
+            await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseAccountHr>(response);
 
         }
@@ -78,6 +79,7 @@ namespace WebRecruitment.Infrastructure.Service
         {
 
             var response = await _unitOfWork.Hr.GetHrByStatus(status);
+
             return _mapper.Map<List<ResponseAccountHr>>(response);
 
         }
@@ -120,7 +122,7 @@ namespace WebRecruitment.Infrastructure.Service
             }
 
             var updateOperation = _mapper.Map(requestUpdateStatusApply, operation);
-            var response = await _unitOfWork.Apply.UpdateOperation(updateOperation);
+            var response =  _unitOfWork.Apply.Update(updateOperation);
             await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseOperation>(response);
 

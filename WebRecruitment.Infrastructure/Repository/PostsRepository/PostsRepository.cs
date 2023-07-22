@@ -14,22 +14,6 @@ namespace WebRecruitment.Infrastructure.Repository.PostsRepository
         {
         }
 
-        public async Task<Post> CreatePostCompany(Post post)
-        {
-            await _context.Set<Post>()!.AddAsync(post);
-            await _context.SaveChangesAsync();
-            return post;
-        }
-
-        public async Task DeletePostAsync(Guid id)
-        {
-            var deletePost = _context.Posts.SingleOrDefault(post => post.PostId == id);
-            if (deletePost != null)
-            {
-                _context.Posts.Remove(deletePost);
-                await _context.SaveChangesAsync();
-            }
-        }
 
         public async Task<List<Post>> GetAllPostAsync()
         {
@@ -57,8 +41,7 @@ namespace WebRecruitment.Infrastructure.Repository.PostsRepository
              .FirstOrDefaultAsync(post => post.PostId == postId);
             if (post == null)
             {
-                throw new Exception($"{nameof(postId)} is null" + postId);
-
+                throw new Exception("NOT FOUND POST");
             }
             return post;
 
@@ -139,20 +122,11 @@ namespace WebRecruitment.Infrastructure.Repository.PostsRepository
 
             post.OrderByDescending(entry => entry.PeriodDate);
             post.Reverse();
-           
+
             return post;
 
 
         }
-
-
-        public async Task<Post> UpdatePostIdCompanyIdWithStatus(Post post)
-        {
-
-            _context.Set<Post>()!.Update(post);
-            await _context.SaveChangesAsync();
-            return post;
-
-        }
+       
     }
 }

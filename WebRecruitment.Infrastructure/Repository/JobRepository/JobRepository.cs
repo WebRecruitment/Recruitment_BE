@@ -17,15 +17,6 @@ namespace WebRecruitment.Infrastructure.Repository.JobRepository
         {
         }
 
-        public async Task<Job> CreateJobByCompany(Job job)
-        {
-
-            await _context.Set<Job>()!.AddAsync(job);
-            await _context.SaveChangesAsync();
-            return job;
-
-        }
-
         public async Task<List<Job>> GetAllJob()
         {
             return await _context.Set<Job>().Include(c => c.Posts).Include(c => c.Company).ToListAsync();
@@ -40,7 +31,7 @@ namespace WebRecruitment.Infrastructure.Repository.JobRepository
              .FirstOrDefaultAsync(c => c.JobId == jobId);
             if (job == null)
             {
-                throw new Exception($"{nameof(job)} is null");
+                throw new Exception("NOT FOUND JOB");
             }
             return job;
 
@@ -50,14 +41,13 @@ namespace WebRecruitment.Infrastructure.Repository.JobRepository
 
         public async Task<List<Job>> GetJobByNameSkill(string nameSkill)
         {
-
             var job = await _context.Set<Job>()!
            .Include(c => c.Company)
            .ThenInclude(p => p.Posts)
            .Where(c => c.NameSkill.ToUpper().Contains(nameSkill.ToUpper())).ToListAsync();
             if (job == null)
             {
-                throw new Exception($"{nameof(nameSkill)} is null" + nameSkill);
+                throw new Exception("NOT FOUND JOB");
             }
             return job;
 

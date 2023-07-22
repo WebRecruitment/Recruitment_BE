@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,13 @@ namespace WebRecruitment.Infrastructure.Service
         {
 
             var request = _mapper.Map<Candidate>(requestAccountToCadidate);
-            request.Account.HashPassword=_passwordHasher.HashPassword(request.Account.HashPassword);
-            var candidate = await _unitOfWork.Candidate.CreateAccountCandidate(request);
+            request.Account.HashPassword = _passwordHasher.HashPassword(request.Account.HashPassword);
+            var candidate =  _unitOfWork.Candidate.Add(request);
+            if (candidate == null)
+            {
+                throw new Exception("ERROR CANDIDATE");
+            }
+            await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseAccountCandidate>(candidate);
 
         }

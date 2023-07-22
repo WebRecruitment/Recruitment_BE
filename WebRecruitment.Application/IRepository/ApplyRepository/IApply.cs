@@ -8,10 +8,8 @@ namespace WebRecruitment.Application.IRepository.ApplyRepository
 {
     public interface IApply : IGenericRepository<Operation>
     {
-        Task<Operation> CreateOperationCompany(Operation operation);
         Task<List<Operation>> GetAllOperation();
         Task<Operation> GetByOperationId(Guid operationId);
         Task CheckCvIdExistPost(Operation operation, Post post);
-        Task<Operation> UpdateOperation(Operation operation);
     }
 }

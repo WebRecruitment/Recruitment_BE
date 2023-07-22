@@ -4,7 +4,7 @@ using WebRecruitment.Application.Model.Response.PostResponse;
 using WebRecruitment.Application.IService;
 using WebRecruitment.Application.Model.Request.HrRequest;
 using WebRecruitment.Application.Common;
-
+using WebRecruitment.Application.Model.Response;
 
 namespace WebRecruitment.WebApi.Controllers
 {
@@ -83,13 +83,24 @@ namespace WebRecruitment.WebApi.Controllers
         [HttpPatch]
         public async Task<ActionResult<ResponsePostCompany>> UpdatePostIdByCompanyId(Guid companyId, Guid postId, [FromBody] RequestUpdateStatusApply requestUpdateStatusApply)
         {
-
-            var response = await _postService.UpdateStatusPostIdByCompanyId(companyId, postId, requestUpdateStatusApply);
-            return response == null ? BadRequest() : Ok(new
+            try
             {
-                Success = true,
-                Data = response
-            });
+                var response = await _postService.UpdateStatusPostIdByCompanyId(companyId, postId, requestUpdateStatusApply);
+                return response == null ? BadRequest() : Ok(new
+                {
+                    Success = true,
+                    Data = response
+                });
+            }catch (Exception ex)
+            {
+                return BadRequest( new ErrorMessResponse {
+                    Exception = ex,
+                    Success = false,
+                    Message = ex.Message,
+                    Error=404
+                });
+
+            }
 
         }
         [HttpGet]

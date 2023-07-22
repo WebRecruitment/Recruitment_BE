@@ -17,33 +17,13 @@ namespace WebRecruitment.Infrastructure.Repository.CvRepository
         {
         }
 
-        public async Task<Cv> CreatCv(Cv cv)
-        {
-
-            await _context.Set<Cv>()!.AddAsync(cv);
-            await _context.SaveChangesAsync();
-            return cv;
-
-        }
-
-        public async Task DeleteCvAsync(Guid id)
-        {
-            var deleteCv = _context.Cvs!
-                .SingleOrDefault(c => c.CvId == id);
-            if (deleteCv != null)
-            {
-                _context.Cvs!.Remove(deleteCv);
-                await _context.SaveChangesAsync();
-            }
-        }
-
         public async Task<List<Cv>> getAllCvs()
         {
 
             var cvs = await _context.Set<Cv>()!.Include(c => c.Candidate).ThenInclude(a => a.Account).ToListAsync();
             if (cvs == null)
             {
-                throw new Exception($"{nameof(cvs)} is null");
+                throw new Exception("CV IS NULL");
             }
             return cvs;
         }
@@ -57,7 +37,7 @@ namespace WebRecruitment.Infrastructure.Repository.CvRepository
             .FirstOrDefaultAsync(c => c.CvId == cVId);
             if (cv == null)
             {
-                throw new Exception($"{nameof(cv)} is null");
+                throw new Exception("CV IS NULL");
             }
             return cv;
 
@@ -72,21 +52,11 @@ namespace WebRecruitment.Infrastructure.Repository.CvRepository
              .FirstOrDefaultAsync(c => c.CvId == cVId);
             if (cv == null)
             {
-                throw new Exception($"{nameof(cv)} is null");
+                throw new Exception("CV IS NULL");
             }
             return cv;
 
         }
-
-
-        public async Task UpdateCvAsync(Guid id, Cv cv)
-        {
-            if (id == cv.CvId)
-            {
-                //var updateCv = _mapper.Map<Cv>(cv);
-                //_context.Cvs!.Update(updateCv);
-                //await _context.SaveChangesAsync();
-            }
-        }
+      
     }
 }

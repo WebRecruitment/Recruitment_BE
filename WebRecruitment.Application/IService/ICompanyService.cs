@@ -18,6 +18,8 @@ namespace WebRecruitment.Application.IService
         Task<List<ResponseCompanyJob>> GetJobResponseByCompanyId(Guid companyId);
 
         Task<ResponseOfCompany> UpdateCompany(Guid id, UpdateRequestCompany updateRequestCompany);
+        Task<ResponseAccountInterviewer> UpdateStatusInterview(Guid interviewerId, Guid companyId,string status);
+        Task<ResponseAccountHr> UpdateStatusHr(Guid hRId, Guid companyid, string status);
 
         public void ChangeStatus(Guid id);
     }

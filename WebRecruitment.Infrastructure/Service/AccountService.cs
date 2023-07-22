@@ -27,6 +27,10 @@ namespace WebRecruitment.Infrastructure.Service
         public async Task<ResponseAllAccount> GetAccountById(Guid id)
         {
             var account = await _unitOfWork.Account.GetAccountById(id);
+            if (account == null)
+            {
+                throw new Exception("Account ID null");
+            }
             return _mapper.Map<ResponseAllAccount>(account);
         }
 
@@ -40,6 +44,10 @@ namespace WebRecruitment.Infrastructure.Service
         {
             var email = await _tokensHandler.ClaimsFromToken(token);
             var account = await _unitOfWork.Account.GetAccountByEmail(email);
+            if (account == null)
+            {
+                throw new Exception("Account Null");
+            }
             var mapper = _mapper.Map(resetPasswordRequest, account);
             mapper.HashPassword = _passwordHasher.HashPassword(resetPasswordRequest.Password);
             _unitOfWork.Account.Update(mapper);

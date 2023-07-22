@@ -6,6 +6,7 @@ using WebRecruitment.Application.Model.Request.AccountRequest;
 using WebRecruitment.Application.Model.Request.CompanyRequest;
 using WebRecruitment.Application.Model.Response.AccountResponse;
 using WebRecruitment.Application.Model.Response.JobResponse;
+using WebRecruitment.Domain.Entity;
 
 namespace WebRecruitment.WebApi.Controllers
 {
@@ -21,7 +22,7 @@ namespace WebRecruitment.WebApi.Controllers
             _companyService = companyService;
         }
         [HttpGet]
-        [Authorize(Roles = "ADMIN ,COMPANY")]
+        //[Authorize(Roles = "ADMIN ,COMPANY")]
 
         public async Task<ActionResult<IEnumerable<ResponseAccountCompany>>> GetCompanies()
         {
@@ -41,26 +42,15 @@ namespace WebRecruitment.WebApi.Controllers
 
         public async Task<ActionResult<ResponseAccountCompany>> GetCompany(Guid id)
         {
-            try
-            {
-                var response = await _companyService.GetByCompanyId(id);
 
-                return Ok(new
-                {
-                    Success = true,
-                    Data = response,
-                });
-            }
-            catch (Exception ex)
-            {
+            var response = await _companyService.GetByCompanyId(id);
 
-                return BadRequest(new
-                {
-                    Success = HttpStatusCode.InternalServerError,
-                    Message = "Failed",
-                    Error = ex.Message
-                });
-            }
+            return Ok(new
+            {
+                Success = true,
+                Data = response,
+            });
+
 
         }
 
@@ -69,67 +59,31 @@ namespace WebRecruitment.WebApi.Controllers
         public async Task<ActionResult<ResponseAccountCompany>> CreateCompanyAccount(RequestAccountToCompany requestAccountToCompany)
         {
 
-            try
-            {
-                var response = await _companyService.CreateAccountCompany(requestAccountToCompany);
-                return Ok(new
-                {
-                    Success = HttpStatusCode.OK,
-                    Message = "Success",
-                    Data = response
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    Success = HttpStatusCode.InternalServerError,
-                    Message = "Failed",
-                    Error = ex.Message
-                });
 
-            }
+            var response = await _companyService.CreateAccountCompany(requestAccountToCompany);
+            return Ok(new
+            {
+                Success = HttpStatusCode.OK,
+                Message = "Success",
+                Data = response
+            });
+
         }
 
 
-
-        //[HttpDelete]
-        //public ActionResult DeleteCompany_ChangeStatus(Guid id)
-        //{
-        //    _company.ChangeStatus(id);
-        //    return Ok(new
-        //    {
-        //        Success = true,
-        //    });
-        //}
 
         [HttpPut]
         [Authorize(Roles = "ADMIN ,COMPANY")]
 
         public async Task<IActionResult> UpdateCompany(Guid id, UpdateRequestCompany updateRequestCompany)
         {
-            try
+            var response = await _companyService.UpdateCompany(id, updateRequestCompany);
+            return response == null ? BadRequest() : Ok(new
             {
-                if (id == null || updateRequestCompany == null)
-                {
-                    return BadRequest();
-                }
-                var response = await _companyService.UpdateCompany(id, updateRequestCompany);
-                if (response == null)
-                {
-                    return BadRequest();
-                }
+                Success = true,
+                Data = response
+            });
 
-                return Ok(new
-                {
-                    Success = true,
-                    Data = response
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
         }
 
         [HttpGet]
@@ -146,6 +100,28 @@ namespace WebRecruitment.WebApi.Controllers
                 Data = response,
             });
         }
+        [HttpPatch]
+        public async Task<ActionResult<ResponseAccountInterviewer>> UpdateStatusInterviewer(Guid inteviewerId, Guid companyId, string status)
+        {
 
+            var response = await _companyService.UpdateStatusInterview(inteviewerId, companyId, status);
+            return response == null ? BadRequest() : Ok(new
+            {
+                Success = true,
+                Data = response
+            });
+        }
+        [HttpPatch]
+        public async Task<ActionResult<ResponseAccountHr>> UpdateStatusHr(Guid hrId, Guid companyId, string status)
+        {
+
+
+            var response = await _companyService.UpdateStatusHr(hrId, companyId, status);
+            return response == null ? BadRequest() : Ok(new
+            {
+                Success = true,
+                Data = response
+            });
+        }
     }
 }

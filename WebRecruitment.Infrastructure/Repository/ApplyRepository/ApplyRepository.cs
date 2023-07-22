@@ -35,22 +35,11 @@ namespace WebRecruitment.Infrastructure.Repository.ApplyRepository
 
         }
 
-        public async Task<Operation> CreateOperationCompany(Operation operation)
-        {
-
-            await _context.Set<Operation>()!.AddAsync(operation);
-
-            await _context.SaveChangesAsync();
-
-            return operation;
-
-        }
+     
 
         public async Task<List<Operation>> GetAllOperation()
         {
-            try
-            {
-                var operation = await _context.Set<Operation>()!
+             var operation = await _context.Set<Operation>()!
                     .Include(c => c.Meetings)
                     .Include(c => c.Hr)
                     .Include(c => c.Company)
@@ -58,17 +47,8 @@ namespace WebRecruitment.Infrastructure.Repository.ApplyRepository
                     .Include(c => c.Post)
                     .ThenInclude(c => c.Job)
                     .ToListAsync();
-                if (operation == null)
-                {
-                    throw new Exception($"{nameof(operation)} is null");
-                }
                 return operation;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message + "\nERROR REPOSITORY", ex);
-
-            }
+           
         }
 
         public async Task<Operation> GetByOperationId(Guid operationId)
@@ -84,19 +64,12 @@ namespace WebRecruitment.Infrastructure.Repository.ApplyRepository
                 .FirstOrDefaultAsync(o => o.OperationId == operationId);
             if (operation == null)
             {
-                throw new Exception($"{nameof(operation)} is null");
+                throw new Exception("APPLY IS NULL");
             }
             return operation;
 
         }
 
-        public async Task<Operation> UpdateOperation(Operation operation)
-        {
-
-            _context.Set<Operation>()!.Update(operation);
-            await _context.SaveChangesAsync();
-            return operation;
-
-        }
+       
     }
 }

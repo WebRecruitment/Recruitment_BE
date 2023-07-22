@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Azure.Core;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.Design;
 using WebRecruitment.Application;
 using WebRecruitment.Application.Common.Security.Hashing;
+using WebRecruitment.Application.IRepository.InterviewerRepository;
 using WebRecruitment.Application.IService;
 using WebRecruitment.Application.Model.Request.AccountRequest;
 using WebRecruitment.Application.Model.Request.CompanyRequest;
@@ -34,10 +36,13 @@ namespace WebRecruitment.Infrastructure.Service
 
         public async Task<ResponseAccountCompany> CreateAccountCompany(RequestAccountToCompany requestAccountToCompany)
         {
-            var company =  _mapper.Map<Company>(requestAccountToCompany);
+            var company = _mapper.Map<Company>(requestAccountToCompany);
             company.Account.HashPassword = _passwordHasher.HashPassword(requestAccountToCompany.HashPassword);
             company.Status = COMPANYENUM.INACTIVE.ToString();
-            var response = await _unitOfWork.Company.CreateAccountCompany(company);
+            var response = _unitOfWork.Company.Update(company);
+            _unitOfWork.Account.Update(company.Account);
+            await _unitOfWork.CommitAsync();
+
             return _mapper.Map<ResponseAccountCompany>(response);
 
         }
@@ -75,13 +80,48 @@ namespace WebRecruitment.Infrastructure.Service
 
         public async Task<ResponseOfCompany> UpdateCompany(Guid id, UpdateRequestCompany updateRequestCompany)
         {
-
             var request = await _unitOfWork.Company.GetByCompanyId(id);
             var company = _mapper.Map(updateRequestCompany, request);
-            var response = await _unitOfWork.Company.UpdateCompany(company);
+            var response =  _unitOfWork.Company.Update(company);
             _unitOfWork.Commit();
             return _mapper.Map<ResponseOfCompany>(response);
 
+        }
+
+        public async Task<ResponseAccountHr> UpdateStatusHr(Guid hRId, Guid companyid, string status)
+        {
+
+            var hr = await _unitOfWork.Hr.GetHrById(hRId);
+           
+            var company = await _unitOfWork.Company.GetByCompanyId(companyid);
+            if(company == null) {
+                throw new Exception("Invalidd COMPANY ID");
+            }
+            if (!hr.CompanyId.Equals(company.CompanyId))
+            {
+                throw new Exception("HR HAS WORK WITH THIS COMPANY");
+            }
+            var updateHr =  _unitOfWork.Hr.Update(hr);
+            updateHr.Status = status;
+            _unitOfWork.Commit();
+            return _mapper.Map<ResponseAccountHr>(updateHr);
+        }
+
+        public async Task<ResponseAccountInterviewer> UpdateStatusInterview(Guid interviewerId, Guid companyId, string status)
+        {
+
+            var interviewer = await _unitOfWork.Interviewer.GetInterviewerById(interviewerId);
+            var company = await _unitOfWork.Company.GetByCompanyId(companyId);
+            
+            if (!interviewer.CompanyId.Equals(company.CompanyId))
+            {
+                throw new Exception("INTERVIEWER HAS WORK WITH THIS COMPANY");
+
+            }
+            var updateInterviewer =  _unitOfWork.Interviewer.Update(interviewer);
+            updateInterviewer.Status = status;
+            _unitOfWork.Commit();
+            return _mapper.Map<ResponseAccountInterviewer>(interviewer);
         }
     }
 }
