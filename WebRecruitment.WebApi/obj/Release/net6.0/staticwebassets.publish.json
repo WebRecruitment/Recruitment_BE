@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "K4yVe69ZxTBDM8zTt8QHROxdvxzoX8AL8xWXLCeEakg=",
+  "Source": "WebRecruitment.WebApi",
+  "BasePath": "_content/WebRecruitment.WebApi",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

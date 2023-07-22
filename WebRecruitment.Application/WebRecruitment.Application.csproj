@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebRecruitment.Domain\WebRecruitment.Domain.csproj" />
+  </ItemGroup>
+
+	
+
+	<ItemGroup>
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+	  <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.18" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.18" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Model\Request\CompanyRequest\" />
+		<Folder Include="Model\Request\HrRequest\" />
+		<Folder Include="Model\Request\InterviewerRequest\" />
+		<Folder Include="Model\Request\JobRequest\" />
+	</ItemGroup>
+</Project>
