@@ -15,6 +15,6 @@ namespace WebRecruitment.Application.IService
     {
         Task<List<ResponseAccountInterviewer>> GetALLInterviewer();
         Task<ResponseAccountInterviewer> CreateAccountInterviewerByPositionCompany(RequestAccountToInterviewer requestAccountToInterviewer);
-        Task<ResponseOperation> UpdateStatusApplyIdByInterviewerId(Guid interviewerId, Guid operationId, RequestUpdateStatusApply requestUpdateStatusApply);
+        Task<ResponseOperation> UpdateStatusApplyIdByInterviewerId(Guid interviewerId, Guid operationId, string status);
     }
 }

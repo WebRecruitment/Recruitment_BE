@@ -62,10 +62,10 @@ namespace WebRecruitment.WebApi.Controllers
 
 
         [HttpPatch]
-        public async Task<ActionResult<ResponseOperation>> UpdateStatusApplyIdByInterviewerId([FromHeader] Guid interviewerId, [FromHeader] Guid operationId, [FromForm] RequestUpdateStatusApply requestUpdateStatusApply)
+        public async Task<ActionResult<ResponseOperation>> UpdateStatusApplyIdByInterviewerId(Guid interviewerId,  Guid operationId, string status)
         {
 
-            var response = await _interviewerService.UpdateStatusApplyIdByInterviewerId(interviewerId, operationId, requestUpdateStatusApply);
+            var response = await _interviewerService.UpdateStatusApplyIdByInterviewerId(interviewerId, operationId, status);
             return Ok(new
             {
                 Success = true,

@@ -3,6 +3,7 @@ using System.Net;
 using WebRecruitment.Application.Model.Response.AccountResponse;
 using WebRecruitment.Application.IService;
 using WebRecruitment.Application.Model.Request.AccountRequest;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebRecruitment.WebApi.Controllers
 {
@@ -18,11 +19,27 @@ namespace WebRecruitment.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "ADMIN")]
+        //[Authorize(Roles = "ADMIN" )]
+        //[Authorize]
         public async Task<ActionResult<IEnumerable<ResponseAllAccount>>> GetAccounts()
         {
 
             var account = await _accountService.GetResponseAllAccounts();
+            return Ok(new
+            {
+                Success = HttpStatusCode.OK,
+                Message = "Success",
+                Data = account
+            });
+
+        }
+        [HttpGet]
+        [Authorize(Roles = "ADMIN")]
+
+        public async Task<ActionResult<ResponseAllAccount>> GetAccountsById(Guid id)
+        {
+
+            var account = await _accountService.GetAccountById(id);
             return Ok(new
             {
                 Success = HttpStatusCode.OK,

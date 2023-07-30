@@ -8,42 +8,12 @@ namespace WebRecruitment.Application.Model.Response.AccountResponse
 {
     public class ResponseAllAccount
     {
-        public ResponseAllAccount()
-        {
-            AdminId = Guid.Empty;
-            CandidateId = Guid.Empty;
-            CompanyId = Guid.Empty;
-            AccountId = Guid.Empty;
-            Username = string.Empty;
-            Role = string.Empty;
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            Date = DateTime.MinValue;
-            Status = string.Empty;
-            HashPassword = string.Empty;
-        }
-
-        public ResponseAllAccount(Guid? adminId, Guid candidateId, Guid companyId, Guid accountId, string username, string hashPassword, string role, string firstName, string lastName, DateTime date, string status, string email, int phone, string address)
-        {
-            AdminId = adminId;
-            CandidateId = candidateId;
-            CompanyId = companyId;
-            AccountId = accountId;
-            Username = username;
-            HashPassword = hashPassword;
-            Role = role;
-            FirstName = firstName;
-            LastName = lastName;
-            Date = date;
-            Status = status;
-            Email = email;
-            Phone = phone;
-            Address = address;
-        }
+        
 
         public Guid? AdminId { get; set; }
         public Guid CandidateId { get; set; }
         public Guid CompanyId { get; set; }
+
         public Guid AccountId { get; set; }
         public string Username { get; set; }
         public string HashPassword { get; set; }
@@ -54,7 +24,13 @@ namespace WebRecruitment.Application.Model.Response.AccountResponse
         public string Status { get; set; }
         public string Email { get; set; } = null!;
         public int Phone { get; set; }
+        public string Image { get; set; }
         public string Address { get; set; }
+        public string Gender { get; set; }
+        public string Bio { get; set; }
+        public string Language { get; set; }
+        public string Nationality { get; set; }
+   
 
     }
 }

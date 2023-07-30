@@ -27,10 +27,6 @@ namespace WebRecruitment.Infrastructure.Service
         public async Task<ResponseAllAccount> GetAccountById(Guid id)
         {
             var account = await _unitOfWork.Account.GetAccountById(id);
-            if (account == null)
-            {
-                throw new Exception("Account ID null");
-            }
             return _mapper.Map<ResponseAllAccount>(account);
         }
 
@@ -60,6 +56,8 @@ namespace WebRecruitment.Infrastructure.Service
             var admin = await _unitOfWork.Admin.GetAdminById(adminId);
             var account = await _unitOfWork.Account.GetAccountById(accountId);
             account.Status = status;
+            _unitOfWork.Account.Update(account);
+            await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseAllAccount>(account);
         }
     }

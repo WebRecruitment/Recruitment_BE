@@ -28,7 +28,7 @@ namespace WebRecruitment.Infrastructure.Service
         {
             var interviewer = _mapper.Map<Interviewer>(requestAccountToInterviewer);
             interviewer.Account.HashPassword = _passwordHasher.HashPassword(requestAccountToInterviewer.HashPassword);
-            var position = await _unitOfWork.Position.GetPositionById(interviewer.PositionId);
+            var position = await _unitOfWork.Position.GetPositionByWId(interviewer.PositionId);
             if (!position.NamePosition.Equals(ROLEPOSITION.INTERVIEWER.ToString()) || !position.Status.Equals(POSITIONENUM.ACTIVE.ToString()))
             {
                 throw new Exception("Invalid Name Position or Status Not Active");
@@ -57,7 +57,7 @@ namespace WebRecruitment.Infrastructure.Service
 
         }
 
-        public async Task<ResponseOperation> UpdateStatusApplyIdByInterviewerId(Guid interviewerId, Guid operationId, RequestUpdateStatusApply requestUpdateStatusApply)
+        public async Task<ResponseOperation> UpdateStatusApplyIdByInterviewerId(Guid interviewerId, Guid operationId, string status)
         {
 
             var interviewer = await _unitOfWork.Interviewer.GetInterviewerById(interviewerId);
@@ -79,8 +79,8 @@ namespace WebRecruitment.Infrastructure.Service
                 throw new Exception("Not Match Company");
             }
 
-            var updateOperation = _mapper.Map(requestUpdateStatusApply, operation);
-            var response = _unitOfWork.Apply.Update(updateOperation);
+            operation.Status = status;
+            var response = _unitOfWork.Apply.Update(operation);
             await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseOperation>(response);
 

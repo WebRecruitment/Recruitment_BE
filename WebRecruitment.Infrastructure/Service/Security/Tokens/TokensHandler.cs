@@ -25,7 +25,7 @@ namespace WebRecruitment.Infrastructure.Service.Security.Tokens
         {
             var refreshToken = GenerateRefreshToken();
             var cacheKey = GetCacheKey(refreshToken.Token, account.Username);
-            _memoryCache.Set(cacheKey, refreshToken, TimeSpan.FromMinutes(_JWToken.RefreshTokenExpiration));
+            _memoryCache.Set(cacheKey, refreshToken, TimeSpan.FromDays(_JWToken.RefreshTokenExpiration));
 
             return BuildAccessToken(account, refreshToken);
         }
@@ -60,7 +60,7 @@ namespace WebRecruitment.Infrastructure.Service.Security.Tokens
             var refreshToken = new RefreshToken
             {
                 Token = Guid.NewGuid().ToString(),
-                Expiration = DateTime.UtcNow.AddSeconds(_JWToken.RefreshTokenExpiration)
+                Expiration = DateTime.UtcNow.AddDays(_JWToken.RefreshTokenExpiration)
             };
 
             return refreshToken;
@@ -68,7 +68,7 @@ namespace WebRecruitment.Infrastructure.Service.Security.Tokens
 
         private AccessToken BuildAccessToken(Account account, RefreshToken refreshToken)
         {
-            var accessTokenExpiration = DateTime.UtcNow.AddSeconds(_JWToken.AccessTokenExpiration);
+            var accessTokenExpiration = DateTime.UtcNow.AddDays(_JWToken.AccessTokenExpiration);
 
             var secretKeyBytes = Encoding.UTF8.GetBytes(_JWToken.JWTSecretKey);
 
@@ -113,8 +113,7 @@ namespace WebRecruitment.Infrastructure.Service.Security.Tokens
             var claimsPrincipal = GetClaimsFromToken(token);
             if (claimsPrincipal == null)
             {
-                return null;
-            }
+                throw new Exception("ClaimsFromToken NULL");            }
 
             var claims = GetClaimsFromToken(token);
             var email =  claims.FirstOrDefault(c => c.Type == "email")?.Value;

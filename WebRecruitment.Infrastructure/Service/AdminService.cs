@@ -26,9 +26,18 @@ namespace WebRecruitment.Infrastructure.Service
             var request = _mapper.Map<Admin>(requestAccountToAdmin);
 
             request.Account.HashPassword = _passwordHasher.HashPassword(requestAccountToAdmin.HashPassword);
-            var admin =  _unitOfWork.Admin.Add(request);
+            var admin = _unitOfWork.Admin.Add(request);
             return _mapper.Map<ResponseAccountAdmin>(admin);
         }
 
+        public async Task<ResponseAccountCompany> UpdateStatusCompany(Guid adminId, Guid companyId, string status)
+        {
+            var admin = await _unitOfWork.Admin.GetAdminById(adminId);
+            var company = await _unitOfWork.Company.GetByCompanyId(companyId);
+            company.Status = status;
+            var updateCompany = _unitOfWork.Company.Update(company);
+            await _unitOfWork.CommitAsync();
+            return _mapper.Map<ResponseAccountCompany>(updateCompany);
+        }
     }
 }

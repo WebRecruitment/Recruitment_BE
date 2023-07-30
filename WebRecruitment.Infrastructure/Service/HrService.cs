@@ -28,7 +28,7 @@ namespace WebRecruitment.Infrastructure.Service
 
             var hr = _mapper.Map<Hr>(requestAccountToHr);
             hr.Account.HashPassword = _passwordHasher.HashPassword(requestAccountToHr.HashPassword);
-            var position = await _unitOfWork.Position.GetPositionById(hr.PositionId);
+            var position = await _unitOfWork.Position.GetPositionByWId(hr.PositionId);
 
             if (!position.NamePosition.Equals(ROLEPOSITION.HR.ToString()) || !position.Status.Equals(POSITIONENUM.ACTIVE.ToString()))
             {
@@ -99,7 +99,7 @@ namespace WebRecruitment.Infrastructure.Service
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseOperation> UpdateStatusApplyIdByHrId(Guid hrId, Guid operationId, RequestUpdateStatusApply requestUpdateStatusApply)
+        public async Task<ResponseOperation> UpdateStatusApplyIdByHrId(Guid hrId, Guid operationId, string status)
         {
 
             var hr = await _unitOfWork.Hr.GetHrById(hrId);
@@ -121,8 +121,8 @@ namespace WebRecruitment.Infrastructure.Service
                 throw new Exception("Company Not Match");
             }
 
-            var updateOperation = _mapper.Map(requestUpdateStatusApply, operation);
-            var response =  _unitOfWork.Apply.Update(updateOperation);
+            operation.Status = status;
+            var response =  _unitOfWork.Apply.Update(operation);
             await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseOperation>(response);
 

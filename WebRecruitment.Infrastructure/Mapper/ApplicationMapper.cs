@@ -44,7 +44,11 @@ namespace WebRecruitment.Infrastructure.Mapper
                 .ForMember(re => re.HashPassword, act => act.MapFrom(src => src.HashPassword))
                 .ForMember(re => re.Phone, act => act.MapFrom(src => src.Phone))
                 .ForMember(re => re.Email, act => act.MapFrom(src => src.Email))
-                .ForMember(re => re.Address, act => act.MapFrom(src => src.Address));
+                .ForMember(re => re.Address, act => act.MapFrom(src => src.Address))
+                .ForMember(re => re.Gender, act => act.MapFrom(src => src.Gender))
+                .ForMember(re => re.Bio, act => act.MapFrom(src => src.Bio))
+                .ForMember(re => re.Language, act => act.MapFrom(src => src.Language))
+                .ForMember(re => re.Nationality, act => act.MapFrom(src => src.Nationality));
 
             CreateMap<Pagination<Post>, Pagination<ResponsePostCompany>>();
 

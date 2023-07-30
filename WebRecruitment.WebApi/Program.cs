@@ -13,6 +13,7 @@ var configuration = new ConfigurationBuilder()
 builder.Services
     .AddWebAPIService(configuration);
 
+
 var app = builder.Build();
 
 app.UseSwagger();
@@ -24,13 +25,16 @@ app.UseRouting();
 app.UseHttpsRedirection();
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
-app.MapHealthChecks("/healthchecks");
-
+app.UseCors();
 app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.UseCors();
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/healthchecks");
+    endpoints.MapControllers();
+});
 
 app.Run();
 

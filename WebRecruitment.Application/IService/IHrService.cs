@@ -15,7 +15,7 @@ namespace WebRecruitment.Application.IService
         Task<List<ResponseAccountHr>> GetHrByName(string name);
         Task<List<ResponseAccountHr>> GetHrByStatus(string status);
         Task SetHrStatus(Guid hrId);
-        Task<ResponseOperation> UpdateStatusApplyIdByHrId(Guid hrId, Guid operationId, RequestUpdateStatusApply requestUpdateStatusApply);
+        Task<ResponseOperation> UpdateStatusApplyIdByHrId(Guid hrId, Guid operationId, string status);
 
     }
 }

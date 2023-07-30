@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -26,9 +27,12 @@ namespace WebRecruitment.WebApi.Configuration
                    ClockSkew = TimeSpan.Zero
                };
            });
+         
+            //services.AddAuthorization();
+
             services.AddMemoryCache();
-
-
+            //CORS
+            
             return services;
         }
     }

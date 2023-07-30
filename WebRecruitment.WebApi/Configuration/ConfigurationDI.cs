@@ -25,6 +25,15 @@ namespace WebRecruitment.WebApi.Configuration
 
 
             // ALLOW HTTP
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyHeader().AllowAnyOrigin() // You can also specify specific origins here instead of allowing any origin.
+                           .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
@@ -35,12 +44,7 @@ namespace WebRecruitment.WebApi.Configuration
             services.AddSingleton<Stopwatch>();
             // services.AddScoped<IClaimsService, ClaimsService>();
             services.AddHttpContextAccessor();
-            services.AddCors(option => option.AddDefaultPolicy(builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+          
 
 
             services.AddEndpointsApiExplorer();

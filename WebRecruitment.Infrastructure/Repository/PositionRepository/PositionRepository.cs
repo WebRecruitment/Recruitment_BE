@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using WebRecruitment.Application.IRepository.AdminRepository;
+﻿using Microsoft.EntityFrameworkCore;
 using WebRecruitment.Application.IRepository.PositionRepository;
 using WebRecruitment.Domain.Entity;
 using WebRecruitment.Infrastructure.GenericRepository;
@@ -13,7 +11,17 @@ namespace WebRecruitment.Infrastructure.Repository.PositionRepository
         {
         }
 
-        public async Task<Position> GetPositionById(Guid? positionId)
+        public async Task<Position> GetPositionById(Guid positionId)
+        {
+            var position = await _context.Set<Position>()!.FirstOrDefaultAsync(p => p.PositionId == positionId);
+            if (position == null)
+            {
+                throw new Exception("NOT FOUND POSITION");
+            }
+            return position;
+        }
+
+        public async Task<Position> GetPositionByWId(Guid? positionId)
         {
 
             var position = await _context.Set<Position>()!.FirstOrDefaultAsync(p => p.PositionId == positionId);

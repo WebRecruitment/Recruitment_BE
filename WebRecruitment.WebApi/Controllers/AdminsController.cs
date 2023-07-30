@@ -28,7 +28,18 @@ namespace WebRecruitment.WebApi.Controllers
             });
 
         }
-      
+        [HttpPatch]
+        public async Task<ActionResult<ResponseAccountCompany>> UpdateStatusCompany(Guid adminId, Guid companyId, string status)
+        {
+
+            var response = await _adminService.UpdateStatusCompany(adminId, companyId, status);
+            return response == null ? BadRequest() : Ok(new
+            {
+                Success = true,
+                Data = response
+            });
+
+        }
 
 
     }

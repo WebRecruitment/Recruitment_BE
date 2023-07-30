@@ -29,22 +29,15 @@ namespace WebRecruitment.Infrastructure.Service
             _passwordHasher = passwordHasher;
         }
 
-        public void ChangeStatus(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<ResponseAccountCompany> CreateAccountCompany(RequestAccountToCompany requestAccountToCompany)
         {
             var company = _mapper.Map<Company>(requestAccountToCompany);
             company.Account.HashPassword = _passwordHasher.HashPassword(requestAccountToCompany.HashPassword);
             company.Status = COMPANYENUM.INACTIVE.ToString();
-            var response = _unitOfWork.Company.Update(company);
-            _unitOfWork.Account.Update(company.Account);
+            var response = _unitOfWork.Company.Add(company);
+            _unitOfWork.Account.Add(company.Account);
             await _unitOfWork.CommitAsync();
-
             return _mapper.Map<ResponseAccountCompany>(response);
-
         }
 
         public async Task<List<ResponseAccountCompany>> GetALLCompany()
@@ -82,26 +75,41 @@ namespace WebRecruitment.Infrastructure.Service
         {
             var request = await _unitOfWork.Company.GetByCompanyId(id);
             var company = _mapper.Map(updateRequestCompany, request);
-            var response =  _unitOfWork.Company.Update(company);
+            var response = _unitOfWork.Company.Update(company);
             _unitOfWork.Commit();
             return _mapper.Map<ResponseOfCompany>(response);
 
+        }
+
+        public async Task<Position> UpdateStatusPositionByCompanyId(Guid companyId, Guid positionId, string status)
+        {
+            var company = await _unitOfWork.Company.GetByCompanyId(companyId);
+            var position = await _unitOfWork.Position.GetPositionById(positionId);
+            if (!company.CompanyId.Equals(position.CompanyId))
+            {
+                throw new Exception("NOT FOUND COMPANY");
+            }
+            position.Status = status;
+            _unitOfWork.Position.Update(position);
+            await _unitOfWork.CommitAsync();
+            return _mapper.Map<Position>(position);
         }
 
         public async Task<ResponseAccountHr> UpdateStatusHr(Guid hRId, Guid companyid, string status)
         {
 
             var hr = await _unitOfWork.Hr.GetHrById(hRId);
-           
+
             var company = await _unitOfWork.Company.GetByCompanyId(companyid);
-            if(company == null) {
+            if (company == null)
+            {
                 throw new Exception("Invalidd COMPANY ID");
             }
             if (!hr.CompanyId.Equals(company.CompanyId))
             {
                 throw new Exception("HR HAS WORK WITH THIS COMPANY");
             }
-            var updateHr =  _unitOfWork.Hr.Update(hr);
+            var updateHr = _unitOfWork.Hr.Update(hr);
             updateHr.Status = status;
             _unitOfWork.Commit();
             return _mapper.Map<ResponseAccountHr>(updateHr);
@@ -112,13 +120,13 @@ namespace WebRecruitment.Infrastructure.Service
 
             var interviewer = await _unitOfWork.Interviewer.GetInterviewerById(interviewerId);
             var company = await _unitOfWork.Company.GetByCompanyId(companyId);
-            
+
             if (!interviewer.CompanyId.Equals(company.CompanyId))
             {
                 throw new Exception("INTERVIEWER HAS WORK WITH THIS COMPANY");
 
             }
-            var updateInterviewer =  _unitOfWork.Interviewer.Update(interviewer);
+            var updateInterviewer = _unitOfWork.Interviewer.Update(interviewer);
             updateInterviewer.Status = status;
             _unitOfWork.Commit();
             return _mapper.Map<ResponseAccountInterviewer>(interviewer);

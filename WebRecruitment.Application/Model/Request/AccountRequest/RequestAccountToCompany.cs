@@ -4,24 +4,8 @@ namespace WebRecruitment.Application.Model.Request.AccountRequest
 {
     public class RequestAccountToCompany
     {
-        public RequestAccountToCompany()
-        {
-        }
-
-        public RequestAccountToCompany(string username, string hashPassword, string firstName, DateTime date, string lastName, string email, string address, int contactNumber, string nameCompany, int phone, string gender)
-        {
-            Username = username;
-            HashPassword = hashPassword;
-            FirstName = firstName;
-            Date = date;
-            LastName = lastName;
-            Email = email;
-            Address = address;
-            ContactNumber = contactNumber;
-            NameCompany = nameCompany;
-            Phone = phone;
-            Gender = gender;
-        }
+        
+     
 
         [Required(ErrorMessage = "The Username field is required.")]
         public string Username { get; set; } = null!;
@@ -34,12 +18,21 @@ namespace WebRecruitment.Application.Model.Request.AccountRequest
         public string LastName { get; set; } = null!;
         [EmailAddress]
         public string Email { get; set; } = null!;
+        [Required(ErrorMessage = "The Address field is required.")]
 
         public string Address { get; set; } = null!;
+        [Required(ErrorMessage = "The ContactNumber field is required.")]
+
         public int ContactNumber { get; set; }
+        [Required(ErrorMessage = "The NameCompany field is required.")]
+
         public string NameCompany { get; set; } = null!;
+        [Required(ErrorMessage = "The Phone field is required.")]
+
         //[Phone]
         public int Phone { get; set; }
+        [Required(ErrorMessage = "The Gender field is required.")]
+
 
         public string Gender { get; set; } = null!;
 

@@ -38,9 +38,9 @@ namespace WebRecruitment.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ADMIN ,COMPANY")]
+        //[Authorize(Roles = "ADMIN ,COMPANY")]
 
-        public async Task<ActionResult<ResponseAccountCompany>> GetCompany(Guid id)
+        public async Task<ActionResult<ResponseAccountCompany>> GetCompanyById(Guid id)
         {
 
             var response = await _companyService.GetByCompanyId(id);
@@ -117,6 +117,16 @@ namespace WebRecruitment.WebApi.Controllers
 
 
             var response = await _companyService.UpdateStatusHr(hrId, companyId, status);
+            return response == null ? BadRequest() : Ok(new
+            {
+                Success = true,
+                Data = response
+            });
+        }
+        [HttpPatch]
+        public async Task<ActionResult<Position>> UpdateStatusPosition(Guid companyId, Guid positionId, string status)
+        {
+            var response = await _companyService.UpdateStatusPositionByCompanyId(companyId, positionId, status);
             return response == null ? BadRequest() : Ok(new
             {
                 Success = true,

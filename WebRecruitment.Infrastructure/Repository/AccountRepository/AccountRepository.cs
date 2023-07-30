@@ -22,7 +22,12 @@ namespace WebRecruitment.Infrastructure.Repository.AccountRepository
 
         public async Task<Account> GetAccountById(Guid id)
         {
-            var account = await _context.Set<Account>()!.FirstOrDefaultAsync(a => a.Accountid == id);
+            var account = await _context.Set<Account>()!
+                    .Include(a => a.Admins)
+                    .Include(a => a.Candidates)
+                    .Include(h => h.Hrs)
+                    .Include(h => h.Interviewers)
+                    .Include(a => a.Companies).FirstOrDefaultAsync(a => a.Accountid == id);
             if (account == null)
             {
                 throw new Exception("NOT FOUND ACCOUNT");
@@ -32,7 +37,7 @@ namespace WebRecruitment.Infrastructure.Repository.AccountRepository
 
         public async Task<Account> GetAccountByUserName(string userName)
         {
-            var account = await _context.Set<Account>()!.SingleOrDefaultAsync(a => a.Username == userName);
+            var account = await _context.Set<Account>()!.FirstOrDefaultAsync(a => a.Username == userName);
             if (account == null)
             {
                 throw new Exception("NOT FOUND ACCOUNT");
@@ -45,9 +50,9 @@ namespace WebRecruitment.Infrastructure.Repository.AccountRepository
             var accounts = await _context.Set<Account>()
                     .Include(a => a.Admins)
                     .Include(a => a.Candidates)
-                    .Include(h => h.Hrs)
-                    .Include(h => h.Interviewers)
                     .Include(a => a.Companies)
+                    //.Include(h => h.Hrs)
+                    //.Include(h => h.Interviewers)
                     .ToListAsync();
             return accounts;
         }

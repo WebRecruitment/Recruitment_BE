@@ -55,7 +55,10 @@ namespace WebRecruitment.Infrastructure.Repository.CompanyRepository
             .Include(c => c.Posts)
             .Include(o => o.Operations)
             .FirstOrDefaultAsync(c => c.CompanyId == companyId);
-            
+            if (company == null)
+            {
+                throw new Exception("NOT FOUND COMPANY");
+            }
             return company;
 
         }

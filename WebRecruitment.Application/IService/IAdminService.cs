@@ -12,6 +12,7 @@ namespace WebRecruitment.Application.IService
     public interface IAdminService
     {
         Task<ResponseAccountAdmin> CreateAccountAdmin(RequestAccountToAdmin requestAccountToAdmin);
+        Task<ResponseAccountCompany> UpdateStatusCompany(Guid adminId, Guid companyId, string status);
 
     }
 }
