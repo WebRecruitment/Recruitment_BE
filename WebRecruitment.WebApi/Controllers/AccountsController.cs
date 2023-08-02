@@ -34,7 +34,7 @@ namespace WebRecruitment.WebApi.Controllers
 
         }
         [HttpGet]
-        [Authorize(Roles = "ADMIN")]
+        //[Authorize(Roles = "ADMIN")]
 
         public async Task<ActionResult<ResponseAllAccount>> GetAccountsById(Guid id)
         {
