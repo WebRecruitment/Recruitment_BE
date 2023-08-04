@@ -22,15 +22,3 @@ C:\Users\duy\Web\webrecruitment-be\WebRecruitment.Contracts\obj\Debug\net6.0\Web
 C:\Users\duy\Web\webrecruitment-be\WebRecruitment.Contracts\obj\Debug\net6.0\refint\WebRecruitment.Contracts.dll
 C:\Users\duy\Web\webrecruitment-be\WebRecruitment.Contracts\obj\Debug\net6.0\WebRecruitment.Contracts.pdb
 C:\Users\duy\Web\webrecruitment-be\WebRecruitment.Contracts\obj\Debug\net6.0\ref\WebRecruitment.Contracts.dll
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\bin\Debug\net6.0\WebRecruitment.Contracts.deps.json
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\bin\Debug\net6.0\WebRecruitment.Contracts.dll
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\bin\Debug\net6.0\WebRecruitment.Contracts.pdb
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\WebRecruitment.Contracts.csproj.AssemblyReference.cache
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\WebRecruitment.Contracts.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\WebRecruitment.Contracts.AssemblyInfoInputs.cache
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\WebRecruitment.Contracts.AssemblyInfo.cs
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\WebRecruitment.Contracts.csproj.CoreCompileInputs.cache
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\WebRecruitment.Contracts.dll
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\refint\WebRecruitment.Contracts.dll
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\WebRecruitment.Contracts.pdb
-C:\Users\duy\source\repos\Web-Recruitment\WebRecruitment.Contracts\obj\Debug\net6.0\ref\WebRecruitment.Contracts.dll
