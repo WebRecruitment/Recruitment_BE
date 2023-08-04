@@ -57,6 +57,12 @@ namespace WebRecruitment.Infrastructure.Service
 
         }
 
+        public async Task<List<ResponseAccountInterviewer>> GetALLInterviewerByCompanyId(Guid companyId)
+        {
+            var interviewer = await _unitOfWork.Interviewer.GetALLInterviewerByCompanyId(companyId);
+            return _mapper.Map<List<ResponseAccountInterviewer>>(interviewer);
+        }
+
         public async Task<ResponseOperation> UpdateStatusApplyIdByInterviewerId(Guid interviewerId, Guid operationId, string status)
         {
 

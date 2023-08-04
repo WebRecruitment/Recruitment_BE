@@ -19,7 +19,7 @@ namespace WebRecruitment.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "ADMIN" )]
+        [Authorize(Roles = "ADMIN")]
         //[Authorize]
         public async Task<ActionResult<IEnumerable<ResponseAllAccount>>> GetAccounts()
         {
@@ -61,6 +61,7 @@ namespace WebRecruitment.WebApi.Controllers
             });
         }
         [HttpPatch]
+        [Authorize(Roles ="ADMIN")]
         public async Task<ActionResult<ResponseAllAccount>> ChangeStatusAccount([FromForm] Guid accountId, [FromForm] Guid adminId, [FromForm] string status)
         {
             var response = await _accountService.UpdateAccountStatus(accountId, adminId, status);

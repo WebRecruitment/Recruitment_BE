@@ -6,6 +6,9 @@ using WebRecruitment.Application.IService;
 using WebRecruitment.Application.Model.Response.OperationResponse;
 using WebRecruitment.Application.Model.Request.HrRequest;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using WebRecruitment.Infrastructure.Service;
 
 namespace WebRecruitment.WebApi.Controllers
 {
@@ -59,8 +62,6 @@ namespace WebRecruitment.WebApi.Controllers
                 });
             }
         }
-
-
         [HttpPatch]
         public async Task<ActionResult<ResponseOperation>> UpdateStatusApplyIdByInterviewerId(Guid interviewerId,  Guid operationId, string status)
         {
@@ -72,6 +73,19 @@ namespace WebRecruitment.WebApi.Controllers
                 Data = response
             }
             );
+        }
+        [HttpGet]
+        [Authorize(Roles = "COMPANY")]
+
+        public async Task<ActionResult<IEnumerable<ResponseAccountInterviewer>>> GetALLInterviewerByCompanyId(Guid companyId)
+        {
+            var response = await _interviewerService.GetALLInterviewerByCompanyId(companyId);
+            return Ok(new
+            {
+                Success = true,
+                Data = response,
+            });
+
         }
 
     }

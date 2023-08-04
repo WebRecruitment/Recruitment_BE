@@ -25,9 +25,11 @@ namespace WebRecruitment.Infrastructure.Repository.AccountRepository
             var account = await _context.Set<Account>()!
                     .Include(a => a.Admins)
                     .Include(a => a.Candidates)
-                    .Include(h => h.Hrs)
+                    .Include(a => a.Companies)
+                    .Include(h => h.Hrs).ThenInclude(h=>h.Company)
                     .Include(h => h.Interviewers)
-                    .Include(a => a.Companies).FirstOrDefaultAsync(a => a.Accountid == id);
+                    .FirstOrDefaultAsync(a => a.Accountid == id);
+            
             if (account == null)
             {
                 throw new Exception("NOT FOUND ACCOUNT");

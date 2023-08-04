@@ -8,6 +8,7 @@ namespace WebRecruitment.Application.IRepository.CompanyRepository
         Task<List<Company>> GetALLCompany();
 
         Task<Company> GetByCompanyId(Guid companyId);
+        Task<Company> GetCompanyByAccountId(Guid accoountId);
 
         Task<Company> GetByCompanyWId(Guid? companyId);
         //ERROR

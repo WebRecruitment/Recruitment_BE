@@ -13,7 +13,7 @@ namespace WebRecruitment.Application.Model.Response.AccountResponse
         public Guid? AdminId { get; set; }
         public Guid CandidateId { get; set; }
         public Guid CompanyId { get; set; }
-
+        public Guid HrId { get; set; }
         public Guid AccountId { get; set; }
         public string Username { get; set; }
         public string HashPassword { get; set; }

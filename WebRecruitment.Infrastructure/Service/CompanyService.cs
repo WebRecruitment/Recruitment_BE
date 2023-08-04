@@ -51,7 +51,7 @@ namespace WebRecruitment.Infrastructure.Service
         public async Task<ResponseAccountCompany> GetByCompanyId(Guid companyId)
         {
 
-            var company = await _unitOfWork.Company.GetByCompanyId(companyId);
+            var company = await _unitOfWork.Company.GetCompanyByAccountId(companyId);
             return _mapper.Map<ResponseAccountCompany>(company);
 
         }

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebRecruitment.Domain.Entity
 {
@@ -14,6 +15,7 @@ namespace WebRecruitment.Domain.Entity
         }
 
         public Guid Accountid { get; set; }
+        
         public string FirstName { get; set; } = null!;
         public string Username { get; set; } = null!;
         public string HashPassword { get; set; } = null!;

@@ -13,7 +13,8 @@ namespace WebRecruitment.Application.IRepository.HRRepository
         Task<Hr> GetHrById(Guid hrId);
         Task<List<Hr>> GetHrByName(string name);
         Task<List<Hr>> GetHrByStatus(string status);
-     
+
+        Task<List<Hr>> GetALLHrByCompanyId(Guid companyId);
 
 
 

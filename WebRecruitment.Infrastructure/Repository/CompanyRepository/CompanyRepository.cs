@@ -82,6 +82,25 @@ namespace WebRecruitment.Infrastructure.Repository.CompanyRepository
             return company;
 
         }
+
+        public async Task<Company> GetCompanyByAccountId(Guid accountId)
+        {
+            var company = await _context.Set<Company>()!
+            .Include(c => c.Account)
+            .Include(c => c.Positions)
+            .Include(c => c.Hrs)
+            .Include(c => c.Interviewers)
+            .Include(c => c.Jobs)
+            .Include(c => c.Posts)
+            .Include(o => o.Operations)
+            .FirstOrDefaultAsync(c => c.Accountid == accountId);
+            if (company == null)
+            {
+                throw new Exception("NOT FOUND COMPANY");
+            }
+            return company;
+        }
+
         public async Task<List<Company>> GetJobResponseByCompanyId(Guid companyId)
         {
 

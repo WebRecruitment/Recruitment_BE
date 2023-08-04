@@ -4,6 +4,7 @@ using WebRecruitment.Application.Model.Request.HrRequest;
 using WebRecruitment.Application.Model.Response.AccountResponse;
 using WebRecruitment.Application.IService;
 using WebRecruitment.Application.Model.Response.OperationResponse;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebRecruitment.WebApi.Controllers
 {
@@ -18,6 +19,8 @@ namespace WebRecruitment.WebApi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "ADMIN,COMPANY")]
+
         public async Task<ActionResult<IEnumerable<ResponseAccountHr>>> GetHrs()
         {
 
@@ -30,30 +33,20 @@ namespace WebRecruitment.WebApi.Controllers
             });
 
         }
-
         [HttpGet]
-        public async Task<ActionResult<ResponseAccountHr>> GetHr(Guid id)
+        [Authorize(Roles = "COMPANY")]
+        public async Task<ActionResult<ResponseAccountHr>> GetHrById(Guid id)
         {
-            try
-            {
-                var hr = await _hrService.GetHrById(id);
-                return Ok(new
-                {
-                    Success = HttpStatusCode.OK,
-                    Message = "Success",
-                    Data = hr
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    Success = HttpStatusCode.InternalServerError,
-                    Message = "Failed",
-                    Error = ex.Message
-                });
 
-            }
+            var hr = await _hrService.GetHrById(id);
+            return Ok(new
+            {
+                Success = HttpStatusCode.OK,
+                Message = "Success",
+                Data = hr
+            });
+
+
         }
         [HttpPost]
         public async Task<ActionResult<ResponseAccountHr>> CreateHrAccountCompany(RequestAccountToHr requestAccountToHr)
@@ -79,27 +72,21 @@ namespace WebRecruitment.WebApi.Controllers
             }
         }
 
+        [HttpGet]
+        [Authorize(Roles = "ADMIN,COMPANY")]
 
+        public async Task<ActionResult<IEnumerable<ResponseAccountHr>>> GetALLHrByCompanyId(Guid companyId)
+        {
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<ResponseAccountHr>>> GetSortHrByDate()
-        //{
-        //    try
-        //    {
-        //        var response = await _hR.SortHrByDateDesc();
+            var response = await _hrService.GetALLHrByCompanyId(companyId);
 
-        //        return Ok(new
-        //        {
-        //            Success = true,
-        //            Data = response,
-        //        });
-        //    }
-        //    catch (Exception ex)
-        //    {
+            return Ok(new
+            {
+                Success = true,
+                Data = response,
+            });
 
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+        }
         [HttpGet]
         public async Task<ActionResult<ResponseAccountHr>> GetHrName(string name)
         {

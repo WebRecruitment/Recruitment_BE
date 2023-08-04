@@ -22,7 +22,7 @@ namespace WebRecruitment.WebApi.Controllers
             _companyService = companyService;
         }
         [HttpGet]
-        //[Authorize(Roles = "ADMIN ,COMPANY")]
+        [Authorize(Roles = "ADMIN ,COMPANY")]
 
         public async Task<ActionResult<IEnumerable<ResponseAccountCompany>>> GetCompanies()
         {
@@ -38,9 +38,9 @@ namespace WebRecruitment.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "ADMIN ,COMPANY")]
+        [Authorize(Roles = "ADMIN ,COMPANY")]       
 
-        public async Task<ActionResult<ResponseAccountCompany>> GetCompanyById(Guid id)
+        public async Task<ActionResult<ResponseAccountCompany>> GetCompanyByAccountId(Guid id)
         {
 
             var response = await _companyService.GetByCompanyId(id);
@@ -73,7 +73,6 @@ namespace WebRecruitment.WebApi.Controllers
 
 
         [HttpPut]
-        [Authorize(Roles = "ADMIN ,COMPANY")]
 
         public async Task<IActionResult> UpdateCompany(Guid id, UpdateRequestCompany updateRequestCompany)
         {
@@ -87,7 +86,6 @@ namespace WebRecruitment.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ADMIN ,COMPANY")]
 
         public async Task<ActionResult<ResponseCompanyJob>> GetJobCompany(Guid companyId)
         {
@@ -101,7 +99,8 @@ namespace WebRecruitment.WebApi.Controllers
             });
         }
         [HttpPatch]
-        public async Task<ActionResult<ResponseAccountInterviewer>> UpdateStatusInterviewer(Guid inteviewerId, Guid companyId, string status)
+        [Authorize(Roles = "COMPANY")]
+        public async Task<ActionResult<ResponseAccountInterviewer>> UpdateStatusInterviewer([FromForm] Guid inteviewerId, [FromForm] Guid companyId, [FromForm] string status)
         {
 
             var response = await _companyService.UpdateStatusInterview(inteviewerId, companyId, status);
@@ -112,9 +111,10 @@ namespace WebRecruitment.WebApi.Controllers
             });
         }
         [HttpPatch]
-        public async Task<ActionResult<ResponseAccountHr>> UpdateStatusHr(Guid hrId, Guid companyId, string status)
-        {
+        [Authorize(Roles = "COMPANY")]
 
+        public async Task<ActionResult<ResponseAccountHr>> UpdateStatusHr([FromForm] Guid hrId, [FromForm] Guid companyId, [FromForm] string status)
+        {
 
             var response = await _companyService.UpdateStatusHr(hrId, companyId, status);
             return response == null ? BadRequest() : Ok(new
@@ -124,7 +124,8 @@ namespace WebRecruitment.WebApi.Controllers
             });
         }
         [HttpPatch]
-        public async Task<ActionResult<Position>> UpdateStatusPosition(Guid companyId, Guid positionId, string status)
+
+        public async Task<ActionResult<Position>> UpdateStatusPosition([FromForm] Guid companyId, [FromForm] Guid positionId, [FromForm] string status)
         {
             var response = await _companyService.UpdateStatusPositionByCompanyId(companyId, positionId, status);
             return response == null ? BadRequest() : Ok(new

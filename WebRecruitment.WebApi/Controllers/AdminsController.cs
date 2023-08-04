@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using WebRecruitment.Application.IService;
 using WebRecruitment.Application.Model.Request.AccountRequest;
 using WebRecruitment.Application.Model.Response.AccountResponse;
@@ -17,6 +19,7 @@ namespace WebRecruitment.WebApi.Controllers
         }
 
         [HttpPost]
+
         public async Task<ActionResult<ResponseAccountAdmin>> CreateAdminAccount(RequestAccountToAdmin requestAccountToAdmin)
         {
 
@@ -29,6 +32,8 @@ namespace WebRecruitment.WebApi.Controllers
 
         }
         [HttpPatch]
+        [Authorize(Roles = "ADMIN")]
+
         public async Task<ActionResult<ResponseAccountCompany>> UpdateStatusCompany(Guid adminId, Guid companyId, string status)
         {
 

@@ -10,34 +10,52 @@ namespace WebRecruitment.Infrastructure.Repository.HrRepository
 {
     public class HrRepository : GenericRepository<Hr>, IHR
     {
-      
+
 
         public HrRepository(TuyendungContext context) : base(context)
         {
         }
 
 
-  
+
 
         public async Task<List<Hr>> GetALLHr()
         {
-            
-                var hr = await _context.Set<Hr>()
-                .Include(a => a.Account)
-                .Include(p => p.Position)
-                .Include(p => p.Posts)
-                .Include(c => c.Company)
-                .Include(m => m.Meetings)
-                .Include(o => o.Operations)
-                .ToListAsync();
-                return hr;
-            
+
+            var hr = await _context.Set<Hr>()
+            .Include(a => a.Account)
+            .Include(p => p.Position)
+            .Include(p => p.Posts)
+            .Include(c => c.Company)
+            .Include(m => m.Meetings)
+            .Include(o => o.Operations)
+            .ToListAsync();
+            return hr;
+
+        }
+
+        public async Task<List<Hr>> GetALLHrByCompanyId(Guid companyId)
+        {
+            var hr = await _context.Hrs!
+           .Include(a => a.Account)
+           .Include(p => p.Position)
+           .Include(c => c.Company)
+           .Include(p => p.Posts)
+           .Include(m => m.Meetings)
+           .Include(o => o.Operations)
+           .Where(s => s.CompanyId == companyId).ToListAsync();
+            if (hr == null)
+            {
+                throw new Exception("NOT FOUND COMPANY");
+            }
+            return hr;
         }
 
         public async Task<Hr> GetHrById(Guid hrId)
         {
 
-            var hr = await _context.Hrs!.Include(a => a.Account)
+            var hr = await _context.Hrs!
+            .Include(a => a.Account)
             .Include(p => p.Position)
             .Include(c => c.Company)
             .Include(p => p.Posts)
@@ -81,7 +99,7 @@ namespace WebRecruitment.Infrastructure.Repository.HrRepository
             .Include(p => p.Position)
             .Include(c => c.Company)
             .ToListAsync();
-           
+
             return hr;
 
         }

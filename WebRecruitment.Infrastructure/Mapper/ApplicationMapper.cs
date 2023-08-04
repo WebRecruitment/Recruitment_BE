@@ -33,7 +33,9 @@ namespace WebRecruitment.Infrastructure.Mapper
             CreateMap<Account, ResponseAllAccount>()
                 .ForMember(re => re.AdminId, act => act.MapFrom(src => src.Admins.Select(p => p.AdminId).FirstOrDefault()))
                 .ForMember(re => re.CandidateId, act => act.MapFrom(src => src.Candidates.Select(p => p.CandidateId).FirstOrDefault()))
-                .ForMember(re => re.CompanyId, act => act.MapFrom(src => src.Companies.Select(p => p.CompanyId).FirstOrDefault()))
+                .ForMember(re => re.CompanyId, act => act.MapFrom(src => src.Companies.Select(p => p.CompanyId).SingleOrDefault()))
+                .ForMember(re => re.HrId, act => act.MapFrom(src => src.Hrs.Select(p => p.HrId).SingleOrDefault()))
+
                 .ForMember(re => re.AccountId, act => act.MapFrom(src => src.Accountid))
                 .ForMember(re => re.Username, act => act.MapFrom(src => src.Username))
                 .ForMember(re => re.Role, act => act.MapFrom(src => src.Role))

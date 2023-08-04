@@ -13,6 +13,8 @@ namespace WebRecruitment.Application.IService
         Task SetStatusAccountOfHr(Guid hrId);
         Task<List<ResponseAccountHr>> SortHrByDateDesc();
         Task<List<ResponseAccountHr>> GetHrByName(string name);
+        Task<List<ResponseAccountHr>> GetALLHrByCompanyId(Guid companyId);
+
         Task<List<ResponseAccountHr>> GetHrByStatus(string status);
         Task SetHrStatus(Guid hrId);
         Task<ResponseOperation> UpdateStatusApplyIdByHrId(Guid hrId, Guid operationId, string status);

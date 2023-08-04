@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using WebRecruitment.Application;
 using WebRecruitment.Application.Common.Security.Hashing;
+using WebRecruitment.Application.IRepository.PositionRepository;
 using WebRecruitment.Application.IService;
 using WebRecruitment.Application.Model.Request.AccountRequest;
 using WebRecruitment.Application.Model.Response.AccountResponse;
 using WebRecruitment.Domain.Entity;
+using WebRecruitment.Domain.Enums;
 
 namespace WebRecruitment.Infrastructure.Service
 {
@@ -32,10 +34,17 @@ namespace WebRecruitment.Infrastructure.Service
 
         public async Task<ResponseAccountCompany> UpdateStatusCompany(Guid adminId, Guid companyId, string status)
         {
-            var admin = await _unitOfWork.Admin.GetAdminById(adminId);
+             await _unitOfWork.Admin.GetAdminById(adminId);
             var company = await _unitOfWork.Company.GetByCompanyId(companyId);
             company.Status = status;
+            foreach(var position in company.Positions)
+            {
+                position.Status= POSITIONENUM.ACTIVE.ToString();
+                _unitOfWork.Position.Update(position);
+
+            }
             var updateCompany = _unitOfWork.Company.Update(company);
+
             await _unitOfWork.CommitAsync();
             return _mapper.Map<ResponseAccountCompany>(updateCompany);
         }

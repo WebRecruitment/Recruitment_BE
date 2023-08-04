@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure;
 using WebRecruitment.Application;
 using WebRecruitment.Application.Common.Security.Hashing;
 using WebRecruitment.Application.IService;
@@ -56,6 +57,12 @@ namespace WebRecruitment.Infrastructure.Service
             var repsonse = await _unitOfWork.Hr.GetALLHr();
             return _mapper.Map<List<ResponseAccountHr>>(repsonse);
 
+        }
+
+        public async Task<List<ResponseAccountHr>> GetALLHrByCompanyId(Guid companyId)
+        {
+            var response = await _unitOfWork.Hr.GetALLHrByCompanyId(companyId);
+            return _mapper.Map<List<ResponseAccountHr>>(response);
         }
 
         public async Task<ResponseAccountHr> GetHrById(Guid hrId)

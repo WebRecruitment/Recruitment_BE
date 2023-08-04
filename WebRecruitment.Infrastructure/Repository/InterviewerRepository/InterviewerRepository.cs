@@ -13,7 +13,7 @@ namespace WebRecruitment.Infrastructure.Repository.InterviewerRepository
 
         public async Task<List<Interviewer>> GetALLInterviewer()
         {
-            
+
             var interviewer = await _context.Set<Interviewer>()!
             .Include(a => a.Account)
             .Include(p => p.Position)
@@ -23,6 +23,17 @@ namespace WebRecruitment.Infrastructure.Repository.InterviewerRepository
 
             return interviewer;
 
+        }
+
+        public async Task<List<Interviewer>> GetALLInterviewerByCompanyId(Guid companyId)
+        {
+            var interviewer = await _context.Set<Interviewer>()!
+           .Include(a => a.Account)
+           .Include(p => p.Position)
+           .Include(m => m.Meetings)
+           .Include(m => m.Company)
+           .Where(i => i.CompanyId == companyId).ToListAsync();
+            return interviewer;
         }
 
         public async Task<Interviewer> GetInterviewerById(Guid interviewerId)
@@ -42,6 +53,6 @@ namespace WebRecruitment.Infrastructure.Repository.InterviewerRepository
             return interviewer;
 
         }
-       
+
     }
 }
