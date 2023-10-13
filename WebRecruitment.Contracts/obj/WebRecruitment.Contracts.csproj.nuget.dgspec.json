@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj": {}
+    "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj": {}
   },
   "projects": {
-    "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj": {
+    "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj",
         "projectName": "WebRecruitment.Contracts",
-        "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj",
+        "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj",
         "packagesPath": "C:\\Users\\duy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\duy\\Source\\Repos\\Web-Recruitment\\WebRecruitment.Contracts\\obj\\",
+        "outputPath": "C:\\Users\\duy\\Source\\Repos\\Recruitment_BE\\WebRecruitment.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebRecruitment.Application.Common.Security.Tokens
+﻿namespace WebRecruitment.Application.Common.Security.Tokens
 {
     public class RefreshToken 
     {

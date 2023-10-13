@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.WebApi\\WebRecruitment.WebApi.csproj": {}
+    "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.WebApi\\WebRecruitment.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Application\\WebRecruitment.Application.csproj": {
+    "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Application\\WebRecruitment.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Application\\WebRecruitment.Application.csproj",
+        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Application\\WebRecruitment.Application.csproj",
         "projectName": "WebRecruitment.Application",
-        "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Application\\WebRecruitment.Application.csproj",
+        "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Application\\WebRecruitment.Application.csproj",
         "packagesPath": "C:\\Users\\duy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Application\\obj\\",
+        "outputPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj": {
-                "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj"
+              "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj": {
+                "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj"
               }
             }
           }
@@ -94,14 +94,14 @@
         }
       }
     },
-    "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj": {
+    "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj",
         "projectName": "WebRecruitment.Contracts",
-        "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj",
+        "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj",
         "packagesPath": "C:\\Users\\duy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\duy\\Source\\Repos\\Web-Recruitment\\WebRecruitment.Contracts\\obj\\",
+        "outputPath": "C:\\Users\\duy\\Source\\Repos\\Recruitment_BE\\WebRecruitment.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -154,14 +154,14 @@
         }
       }
     },
-    "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj": {
+    "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj",
         "projectName": "WebRecruitment.Domain",
-        "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj",
+        "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Domain\\WebRecruitment.Domain.csproj",
         "packagesPath": "C:\\Users\\duy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Domain\\obj\\",
+        "outputPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -183,8 +183,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj": {
-                "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj"
+              "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj": {
+                "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Contracts\\WebRecruitment.Contracts.csproj"
               }
             }
           }
@@ -218,14 +218,14 @@
         }
       }
     },
-    "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj": {
+    "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj",
         "projectName": "WebRecruitment.Infrastructure",
-        "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\duy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -247,8 +247,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Application\\WebRecruitment.Application.csproj": {
-                "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Application\\WebRecruitment.Application.csproj"
+              "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Application\\WebRecruitment.Application.csproj": {
+                "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Application\\WebRecruitment.Application.csproj"
               }
             }
           }
@@ -320,14 +320,14 @@
         }
       }
     },
-    "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.WebApi\\WebRecruitment.WebApi.csproj": {
+    "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.WebApi\\WebRecruitment.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.WebApi\\WebRecruitment.WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.WebApi\\WebRecruitment.WebApi.csproj",
         "projectName": "WebRecruitment.WebApi",
-        "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.WebApi\\WebRecruitment.WebApi.csproj",
+        "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.WebApi\\WebRecruitment.WebApi.csproj",
         "packagesPath": "C:\\Users\\duy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.WebApi\\obj\\",
+        "outputPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -350,8 +350,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\duy\\source\\repos\\Web-Recruitment\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj"
+              "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\duy\\source\\repos\\Recruitment_BE\\WebRecruitment.Infrastructure\\WebRecruitment.Infrastructure.csproj"
               }
             }
           }
